@@ -19,29 +19,31 @@
     </style>
   </head>
 
-  <body></body>
+  <body>
+    <main></main>
+  </body>
   <script type="module">
-    import { el } from "./scripts.js";
+    import { $, el, req } from "./scripts.js";
     import { expect } from "./test.js";
 
     const results = [
-      expect(el("div", "foo"), "<div>foo</div>"),
-      expect(el("div", "foo"), "<span>foo</span>"),
-      expect(el("div", "foo"), "<div>bar</div>"),
+      expect(el("div", "foo").outerHTML, "<div>foo</div>"),
+      expect(el("div", "foo").outerHTML, "<span>foo</span>"),
+      expect(el("div", "foo").outerHTML, "<div>bar</div>"),
     ];
 
     const failureCount = results.filter((result) =>
       result.startsWith("failed")
     ).length;
 
-    document.body.append(
+    $("main").append(
       el(
         "p",
         failureCount > 0
           ? `${failureCount.toLocaleString()}/${results.length.toLocaleString()} FAILED`
           : "PASSED"
       ),
-      el("ol", ...results.map((result) => el("li", result.toString())))
+      el("ol", ...results.map((result) => el("li", result)))
     );
   </script>
 </html>
