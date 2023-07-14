@@ -1,13 +1,13 @@
-export const el = (tag, attributesOrElement, ...elements) => {
+export const el = (tag, elementOrAttributes, ...elements) => {
   const element = document.createElement(tag);
 
   if (
-    attributesOrElement instanceof Element ||
-    typeof attributesOrElement === "string"
+    elementOrAttributes instanceof Element ||
+    typeof elementOrAttributes === "string"
   ) {
-    element.append(attributesOrElement);
-  } else if (attributesOrElement instanceof Object) {
-    Object.entries(attributesOrElement).forEach(([key, value]) => {
+    element.append(elementOrAttributes, ...elements);
+  } else if (elementOrAttributes instanceof Object) {
+    Object.entries(elementOrAttributes).forEach(([key, value]) => {
       element.setAttribute(
         key,
         value instanceof Object
@@ -18,9 +18,8 @@ export const el = (tag, attributesOrElement, ...elements) => {
           : value
       );
     });
+    element.append(...elements);
   }
-
-  element.append(...elements);
 
   return element;
 };

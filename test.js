@@ -1,9 +1,6 @@
-export const expect = (el, html) => {
-  const result = el.outerHTML === html;
-
-  return result
+export const expect = (el, html) =>
+  el.outerHTML === html
     ? "passed"
     : `failed
 expected: ${html}
 got:      ${el.outerHTML}`;
-};
