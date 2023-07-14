@@ -41,9 +41,9 @@ export const el = (tag, elementOrAttributes, ...elements) => {
   return element;
 };
 
-export const fetch = async (resource, options = {}) => {
+export const req = async (resource, options = {}) => {
   try {
-    const response = await window.fetch(resource, {
+    const response = await fetch(resource, {
       headers: {
         "Content-Type": "application/json",
         ...options.headers,

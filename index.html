@@ -12,12 +12,12 @@
     <main>Loading…</main>
   </body>
   <script type="module">
-    import { $, el, fetch } from "./scripts.js";
+    import { $, el, req } from "./scripts.js";
 
     let json;
 
     window.setTimeout(async () => {
-      json = await fetch("./test.json");
+      json = await req("./test.json");
 
       const element = el(
         "table",
