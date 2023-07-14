@@ -14,7 +14,11 @@
     import { el } from "/scripts.js";
 
     document.body.append(
-      el("table", { style: "background: red" }, el("tr", el("td", "sup")))
+      el(
+        "table",
+        { style: { background: "black", color: "white" }, border: 1 },
+        el("tr", el("td", "sup"))
+      )
     );
   </script>
 </html>
