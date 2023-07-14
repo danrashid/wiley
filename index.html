@@ -8,16 +8,40 @@
     <title>wiley</title>
   </head>
 
-  <body></body>
+  <body>
+    <main>Loading…</main>
+  </body>
   <script type="module">
-    import { el } from "./scripts.js";
+    import { $, el, fetch } from "./scripts.js";
 
-    const element = el(
-      "table",
-      { style: { background: "black", color: "white" }, border: 1 },
-      el("tr", el("td", "sup", el("br"), "y'all"))
-    );
+    let json;
 
-    document.body.append(element);
+    window.setTimeout(async () => {
+      json = await fetch("./test.json");
+
+      const element = el(
+        "table",
+        { style: { background: "black", color: "white" }, border: 1 },
+        el("tr", el("td", "sup", el("br"), "y'all")),
+        el(
+          "tr",
+          el(
+            "td",
+            {
+              onclick: (event, element) => {
+                console.log(`${element} clicked via ${event.target}`);
+              },
+              style: {
+                "font-family": "monospace",
+                "white-space": "pre",
+              },
+            },
+            el("p", JSON.stringify(json, undefined, 2))
+          )
+        )
+      );
+
+      $("main").replaceChildren(element);
+    }, 2000);
   </script>
 </html>
