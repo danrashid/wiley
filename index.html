@@ -11,10 +11,10 @@
 
   <body></body>
   <script type="module">
-    import { dom } from "/scripts.js";
+    import { el } from "/scripts.js";
 
     document.body.append(
-      dom("table", { style: "background: red" }, dom("tr", dom("td", "sup")))
+      el("table", { style: "background: red" }, el("tr", el("td", "sup")))
     );
   </script>
 </html>

@@ -1,4 +1,4 @@
-export const dom = (tag, attributesOrElement, ...elements) => {
+export const el = (tag, attributesOrElement, ...elements) => {
   const element = document.createElement(tag);
 
   if (
