@@ -1,5 +1,5 @@
-export const $ = (selectors) => {
-  const elements = document.querySelectorAll(selectors);
+export const $ = (selectors, _document = document) => {
+  const elements = _document.querySelectorAll(selectors);
 
   switch (elements.length) {
     case 0:
@@ -41,9 +41,14 @@ export const el = (tag, elementOrAttributes, ...elements) => {
   return element;
 };
 
-export const req = async (resource, options = {}) => {
+export const req = async (
+  resource,
+  options = {},
+  _fetch = fetch,
+  _console = console
+) => {
   try {
-    const response = await fetch(resource, {
+    const response = await _fetch(resource, {
       headers: {
         "Content-Type": "application/json",
         ...options.headers,
@@ -64,6 +69,6 @@ export const req = async (resource, options = {}) => {
         return response;
     }
   } catch (e) {
-    console.error(e);
+    _console.error(e);
   }
 };
