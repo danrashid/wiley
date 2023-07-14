@@ -3,5 +3,7 @@ export const expect = (el, html) => {
 
   return result
     ? "passed"
-    : `failed\nexpected: ${html}\ngot:      ${el.outerHTML}`;
+    : `failed
+expected: ${html}
+got:      ${el.outerHTML}`;
 };
