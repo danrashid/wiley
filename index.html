@@ -19,13 +19,14 @@
     window.setTimeout(async () => {
       json = await req("./test.json");
 
+      let cell;
       const element = el(
         "table",
         { style: { background: "black", color: "white" }, border: 1 },
         el("tr", el("td", "sup", el("br"), "y'all")),
         el(
           "tr",
-          el(
+          (cell = el(
             "td",
             {
               onclick: (event, element) => {
@@ -45,11 +46,13 @@
                 ])
               )
             )
-          )
+          ))
         )
       );
 
       $("main").replaceChildren(element);
+
+      cell.style.background = "red";
     }, 2000);
   </script>
 </html>
