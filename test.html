@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>wiley:test</title>
+    <style>
+      ol {
+        font-family: monospace;
+        white-space: pre;
+      }
+      li {
+        margin-bottom: 1em;
+      }
+    </style>
+  </head>
+
+  <body></body>
+  <script type="module">
+    import { el } from "/scripts.js";
+    import { expect } from "/test.js";
+
+    const results = [
+      expect(el("div", "foo"), "<div>foo</div>"),
+      expect(el("div", "foo"), "<span>foo</span>"),
+      expect(el("div", "foo"), "<div>bar</div>"),
+    ];
+
+    document.body.append(
+      el("ol", ...results.map((result) => el("li", result.toString())))
+    );
+  </script>
+</html>
