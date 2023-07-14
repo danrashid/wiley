@@ -7,8 +7,10 @@
 
     <title>wiley:test</title>
     <style>
-      ol {
+      body {
         font-family: monospace;
+      }
+      ol {
         white-space: pre;
       }
       li {
@@ -28,7 +30,17 @@
       expect(el("div", "foo"), "<div>bar</div>"),
     ];
 
+    const failureCount = results.filter((result) =>
+      result.startsWith("failed")
+    ).length;
+
     document.body.append(
+      el(
+        "p",
+        failureCount > 0
+          ? `${failureCount.toLocaleString()}/${results.length.toLocaleString()} FAILED`
+          : "PASSED"
+      ),
       el("ol", ...results.map((result) => el("li", result.toString())))
     );
   </script>
