@@ -3,6 +3,10 @@
     {
       "id": "ahoy",
       "message": "matey"
+    },
+    {
+      "id": "sup",
+      "message": "boo"
     }
   ]
 }

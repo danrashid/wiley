@@ -36,7 +36,15 @@
                 "white-space": "pre",
               },
             },
-            el("p", JSON.stringify(json, undefined, 2))
+            ...json.data.map((datum) =>
+              el(
+                "dl",
+                ...Object.entries(datum).flatMap(([key, value]) => [
+                  el("dt", key),
+                  el("dd", value),
+                ])
+              )
+            )
           )
         )
       );
