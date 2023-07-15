@@ -10,11 +10,9 @@
       body {
         font-family: monospace;
       }
-      ol {
-        white-space: pre;
-      }
       li {
-        margin-bottom: 1em;
+        white-space: pre;
+        margin: 0.5em 0;
       }
     </style>
   </head>
@@ -24,26 +22,28 @@
   </body>
   <script type="module">
     import { $, el, req } from "./scripts.js";
-    import { expect } from "./test.js";
-
-    const results = [
-      expect(el("div", "foo").outerHTML, "<div>foo</div>"),
-      expect(el("div", "foo").outerHTML, "<span>foo</span>"),
-      expect(el("div", "foo").outerHTML, "<div>bar</div>"),
-    ];
-
-    const failureCount = results.filter((result) =>
-      result.startsWith("failed")
-    ).length;
+    import results from "./tests.js";
 
     $("main").append(
       el(
-        "p",
-        failureCount > 0
-          ? `${failureCount.toLocaleString()}/${results.length.toLocaleString()} FAILED`
-          : "PASSED"
-      ),
-      el("ol", ...results.map((result) => el("li", result)))
+        "ul",
+        ...Object.entries(results).map(([category, tests]) =>
+          el(
+            "li",
+            `${category}: ${
+              Object.values(tests).every((value) => value === "passed")
+                ? "passed"
+                : "failed"
+            }`,
+            el(
+              "ul",
+              ...Object.entries(tests).map(([description, result]) =>
+                el("li", `${description}: ${result}`)
+              )
+            )
+          )
+        )
+      )
     );
   </script>
 </html>
